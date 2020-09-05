@@ -1,0 +1,20 @@
+{
+  "name": "@jimmyhedstr0m/interceptor",
+  "version": "1.0.0",
+  "description": "Intercept JavaScript XMLHttpRequests in systems where you need a callback on certain HTTP requests.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepublish": "tsc"
+  },
+  "keywords": [
+    "XMLHttpRequests",
+    "Intercept"
+  ],
+  "author": "Jimmy Hedström",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^4.0.2"
+  }
+}

@@ -1,13 +1,29 @@
-# interceptor
+# Interceptor
 Intercept JavaScript ```XMLHttpRequest``` in systems where you need a callback on certain HTTP requests.
 
-## Install
+## Installation
+
+### Using npm
 ```console
 $ npm install --save @jimmyhedstr0m/interceptor
 ```
 or
 ```console
 $ yarn add @jimmyhedstr0m/interceptor
+```
+
+Now import `Interceptor` and start using it:
+
+```js
+import Interceptor from '@jimmyhedstr0m/interceptor';
+```
+
+### Without a bundler
+
+Add this script to your HTML file:
+
+```html
+<script src="https://https://unpkg.com/@jimmyhedstr0m/interceptor/dist/index.js"></script>
 ```
 
 ## Usage

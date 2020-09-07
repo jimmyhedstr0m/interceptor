@@ -1,6 +1,6 @@
 import http from 'http';
 
-import Interceptor from './index';
+import { Interceptor } from './index';
 
 const host = 'localhost';
 const port = 8080;

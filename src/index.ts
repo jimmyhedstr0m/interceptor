@@ -54,7 +54,7 @@ const defaultOptions: Options = {
   timeout: 30000
 };
 
-export default class Interceptor {
+export class Interceptor {
   private url: string | RegExp = '';
   private options: Options;
 

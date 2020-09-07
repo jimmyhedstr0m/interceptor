@@ -29,7 +29,7 @@ XMLHttpRequest.prototype.send = function (value) {
       if (currentUrl === trimmedResponse) {
         urlQueue.splice(i, 1);
 
-        listeners.forEach((listener) => {
+        for (const listener of listeners) {
           if (isMatch(responseUrl, listener.targetUrl)) {
             const callback = listener.cb;
             const response = (event.currentTarget as any).response;
@@ -38,9 +38,10 @@ XMLHttpRequest.prototype.send = function (value) {
             } else {
               callback(undefined, response);
             }
-            return;
+
+            break;
           }
-        });
+        }
 
         return;
       }

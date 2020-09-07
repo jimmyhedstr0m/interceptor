@@ -17,8 +17,6 @@ module.exports = {
   output: {
     filename: 'index.js',
     path: path.resolve(__dirname, 'dist'),
-    // library: 'myLibrary',
-    // libraryTarget: 'var'
     libraryTarget: 'umd',
     globalObject: 'this'
   },

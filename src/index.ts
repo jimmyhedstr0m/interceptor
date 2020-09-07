@@ -20,28 +20,31 @@ XMLHttpRequest.prototype.send = function (value) {
 
   function onEvent(event: ProgressEvent<XMLHttpRequestEventTarget>) {
     const responseUrl = (event.currentTarget as any).responseURL;
-    const queueLength = urlQueue.length;
 
-    for (let i = 0; i < queueLength; i++) {
-      if (urlQueue[i] === responseUrl) {
+    urlQueue.forEach((currentUrl, i) => {
+      const trimmedResponse = currentUrl.indexOf('http') > -1
+        ? responseUrl
+        : responseUrl.replace(/^[^#]*?:\/\/.*?(\/.*)$/, '$1');
+
+      if (currentUrl === trimmedResponse) {
         urlQueue.splice(i, 1);
 
-        for (let j = 0; j < listeners.length; j++) {
-          if (isMatch(responseUrl, listeners[j].targetUrl)) {
-            const callback = listeners[j].cb;
+        listeners.forEach((listener) => {
+          if (isMatch(responseUrl, listener.targetUrl)) {
+            const callback = listener.cb;
             const response = (event.currentTarget as any).response;
             if (event.type === 'abort' || event.type === 'error' || (event.currentTarget as any).status >= 400) {
               callback(response, undefined);
             } else {
               callback(undefined, response);
             }
-
-            break;
+            return;
           }
-        }
+        });
+
         return;
       }
-    }
+    });
   }
 
   this.addEventListener('abort', onEvent);
@@ -67,7 +70,7 @@ export class Interceptor {
 
     this.url = targetUrl;
 
-    function callback(err: any, res: any) {
+    const callback = (err: any, res: any) => {
       clearTimeout(timer);
 
       cb(err, res);
@@ -82,11 +85,11 @@ export class Interceptor {
   }
 
   public unregister() {
-    for (let i = 0; i < listeners.length; i++) {
-      if (listeners[i].targetUrl === this.url) {
+    listeners.forEach((listener, i) => {
+      if (listener.targetUrl === this.url) {
         listeners.splice(i, 1);
         return;
       }
-    }
+    });
   }
 }

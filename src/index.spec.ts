@@ -17,6 +17,9 @@ const requestListener: http.RequestListener = (req, res) => {
       res.statusCode = 200;
       res.end(JSON.stringify({ name: 'John Doe' }));
       return;
+    case '/hello':
+      res.statusCode = 200;
+      res.end('world');
     default:
       res.statusCode = 404;
       res.end('Not found');

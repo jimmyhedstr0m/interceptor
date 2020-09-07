@@ -1,6 +1,6 @@
 {
   "name": "@jimmyhedstr0m/interceptor",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Intercept JavaScript XMLHttpRequests in systems where you need a callback on certain HTTP requests.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -23,6 +23,7 @@
     "@types/jest": "^26.0.13",
     "@typescript-eslint/eslint-plugin": "^4.0.1",
     "@typescript-eslint/parser": "^4.0.1",
+    "jest": "^26.4.2",
     "ts-jest": "^26.3.0",
     "ts-loader": "^8.0.3",
     "typescript": "^4.0.2",

@@ -23,7 +23,7 @@ import Interceptor from '@jimmyhedstr0m/interceptor';
 Add this script to your HTML file:
 
 ```html
-<script src="https://https://unpkg.com/@jimmyhedstr0m/interceptor/dist/index.js"></script>
+<script src="https://unpkg.com/@jimmyhedstr0m/interceptor/dist/index.js"></script>
 ```
 
 ## Usage

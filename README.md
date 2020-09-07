@@ -1,4 +1,5 @@
 # Interceptor
+[![npm](https://img.shields.io/npm/v/@jimmyhedstr0m/interceptor.svg)](https://www.npmjs.com/package/@jimmyhedstr0m/interceptor)
 Intercept JavaScript ```XMLHttpRequest``` in systems where you need a callback on certain HTTP requests.
 
 ## Installation

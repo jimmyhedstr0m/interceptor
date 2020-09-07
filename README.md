@@ -14,22 +14,25 @@ $ yarn add @jimmyhedstr0m/interceptor
 ```javascript
 const Interceptor = require('@jimmyhedstr0m/interceptor');
 
+// optional
 const options = {
   timeout: 30000
 };
 
-Interceptor.register('https://randomuser.me/api/', options, (err, res) => {
+const interceptor = new Interceptor(options);
+
+interceptor.register('https://randomuser.me/api/', (err, res) => {
   if (err) {
     console.log('got error', err);
   }
 
   console.log('success', res);
-  Interceptor.unregister();
+  interceptor.unregister();
 });
 
-const xhttp = new XMLHttpRequest();
-xhttp.open("GET", "https://randomuser.me/api/");
-xhttp.send();
+const xhr = new XMLHttpRequest();
+xhr.open('GET', 'https://randomuser.me/api/');
+xhr.send();
 ```
 
 You can also pattern match any url by using RegExp:

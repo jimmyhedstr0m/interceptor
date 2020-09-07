@@ -19,7 +19,7 @@ XMLHttpRequest.prototype.send = function (value) {
   }
 
   function onEvent(event: ProgressEvent<XMLHttpRequestEventTarget>) {
-    const responseUrl = (event.currentTarget as any).responseURL.replace(window.origin, '');
+    const responseUrl = (event.currentTarget as any).responseURL;
     const queueLength = urlQueue.length;
 
     for (let i = 0; i < queueLength; i++) {
@@ -55,17 +55,20 @@ const defaultOptions: Options = {
 };
 
 export default class Interceptor {
-  private static url: string | RegExp = '';
+  private url: string | RegExp = '';
+  private options: Options;
 
-  public static register(targetUrl: string | RegExp, options: Options | undefined, cb: Callback) {
-    const currentOptions = options || defaultOptions;
-    let timer: ReturnType<typeof setTimeout> | undefined;
+  constructor(options?: Options) {
+    this.options = options || defaultOptions;
+  }
+
+  public register(targetUrl: string | RegExp, cb: Callback) {
+    let timer: ReturnType<typeof setTimeout>;
 
     this.url = targetUrl;
 
     function callback(err: any, res: any) {
       clearTimeout(timer);
-      timer = undefined;
 
       cb(err, res);
     }
@@ -75,13 +78,10 @@ export default class Interceptor {
       cb: callback
     });
 
-    timer = setTimeout(() => {
-      timer = undefined;
-      cb(targetUrl + ' timed out', undefined);
-    }, currentOptions.timeout);
+    timer = setTimeout(() => cb(targetUrl + ' timed out', undefined), this.options.timeout);
   }
 
-  public static unregister() {
+  public unregister() {
     for (let i = 0; i < listeners.length; i++) {
       if (listeners[i].targetUrl === this.url) {
         listeners.splice(i, 1);
